@@ -12,7 +12,7 @@ to be used with this, at least within reason:
 ```js
 import { test, suite } from 'uvu';
 import * as assert from 'uvu/assert';
-import { $fs, $hs, resetMocks } from '../src/main';
+import { $fs, $hs, resetMocks } from 'hackmock';
 
 // Reset all mocks to their default state.
 test.before.each(() => resetMocks());
@@ -24,8 +24,8 @@ test('scripts.lib', () => {
     assert.is(lib.clamp(101, 0, 100), 100);
 });
 
-// This function might be part of your actual code, but can be
-// unit tested with hackmock outside of hackmud.
+// This function might be part of an acct_nt solver. It can be unit-tested
+// without changing it.
 
 const getOutboundTransactions = () => {
     // Could also just be { count: 'all', from: 'sarahisweird' }.
@@ -44,6 +44,6 @@ acct_nt('Transactions can be filtered', () => {
     ]});
 
     // Mapped for brevity.
-    assert.equal(getOutboundTransactions().map(tx => tx.amount), [ 2 ]);
+    assert.equal(getOutboundTransactions().map(tx => tx.amount), [ 1 ]);
 });
 ```
